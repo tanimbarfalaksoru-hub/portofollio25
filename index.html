@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Petrus Paulus Ditilebit</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    html {
+      height: 100%;
+    }
+
+    .container {
+      max-width: 480px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 40px 30px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .profile-section {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .profile-image {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+    }
+
+    .profile-name {
+      font-size: 28px;
+      font-weight: 700;
+      color: #2d3748;
+      margin-bottom: 8px;
+    }
+
+    .profile-title {
+      font-size: 16px;
+      color: #667eea;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .profile-bio {
+      font-size: 14px;
+      color: #718096;
+      line-height: 1.6;
+    }
+
+    .social-links {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .social-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .social-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .social-button:active {
+      transform: translateY(0);
+    }
+
+    .social-button svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    .facebook {
+      background: #1877F2;
+      color: white;
+    }
+
+    .instagram {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      color: white;
+    }
+
+    .linkedin {
+      background: #0A66C2;
+      color: white;
+    }
+
+    .email {
+      background: #EA4335;
+      color: white;
+    }
+
+    .twitter {
+      background: #1DA1F2;
+      color: white;
+    }
+
+    .youtube {
+      background: #FF0000;
+      color: white;
+    }
+
+    .tiktok {
+      background: #000000;
+      color: white;
+    }
+
+    .website {
+      background: #6366F1;
+      color: white;
+    }
+
+    .location {
+      background: #10B981;
+      color: white;
+    }
+
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 16px;
+      padding: 0;
+      max-width: 500px;
+      width: 90%;
+      max-height: 90%;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 24px 16px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .modal-header h3 {
+      margin: 0;
+      color: #2d3748;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .close-modal {
+      font-size: 28px;
+      color: #718096;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.3s ease;
+    }
+
+    .close-modal:hover {
+      color: #2d3748;
+    }
+
+    .modal-form {
+      padding: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: #2d3748;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      margin-top: 24px;
+    }
+
+    .btn-cancel,
+    .btn-submit {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-cancel {
+      background: #f7fafc;
+      color: #4a5568;
+      border: 2px solid #e2e8f0;
+    }
+
+    .btn-cancel:hover {
+      background: #edf2f7;
+    }
+
+    .btn-submit {
+      background: #25D366;
+      color: white;
+    }
+
+    .btn-submit:hover {
+      background: #22c55e;
+      transform: translateY(-1px);
+    }
+
+    .btn-submit:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 30px 20px;
+      }
+
+      .profile-name {
+        font-size: 24px;
+      }
+
+      .social-links {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-content {
+        width: 95%;
+        margin: 20px;
+      }
+
+      .form-actions {
+        flex-direction: column;
+      }
+
+      .btn-cancel,
+      .btn-submit {
+        width: 100%;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="profile-section">
+      <div class="profile-image">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgP0qOGnf8ymLweCfivyQOrk9poUN0RrYX47Ky9vhfEAzFzyUfonSFzzMXoFlaMBP5yBvLC1qkjvYKigvAOwIDZRRqoYMDHd-DxI19ZpjGeiaUaJISKdP4jL7VXg6TasZYdklgpBGDw08H2DbdfhOC7avVmhyphenhyphencWxhGwNjSv2ioOt8R2RanNiYaJwI69Vw23/s320/IMG_20240830_071145_453.jpg" 
+             alt="Petrus P. Ditilebit" 
+             style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" 
+             onerror="this.style.display='none'; this.parentElement.innerHTML='👤';">
+      </div>
+      <h1 class="profile-name" id="profileName">Nama Anda</h1>
+      <p class="profile-title" id="profileTitle">Profesi Anda</p>
+      <p class="profile-bio" id="profileBio">Ceritakan tentang diri Anda dan keahlian yang Anda miliki di sini.</p>
+    </div>
+    <div class="social-links" id="socialLinks">
+      <a href="#" class="social-button whatsapp" id="whatsappBtn" target="_blank" rel="noopener noreferrer">
+        <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg> WhatsApp
+      </a>
+      <a href="#" class="social-button facebook" id="facebookBtn" target="_blank" rel="noopener noreferrer">
+        <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg> Facebook
+      </a>
+      <a href="#" class="social-button instagram" id="instagramBtn" target="_blank" rel="noopener noreferrer">
+        <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
+        </svg> Instagram
+      </a>
+      <a href="#" class="social-button linkedin" id="linkedinBtn" target="_blank" rel="noopener noreferrer">
+        <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg> LinkedIn
+      </a>
+      <a href="#" class="social-button email" id="emailBtn" target="_blank" rel="noopener noreferrer">
+        <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+        </svg> Email
+      </a>
+      <a href="#" class="social-button twitter" id="twitterBtn" target="_blank" rel="noopener noreferrer">
+        <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+        </svg> Twitter
+      </a>
+      <a href="#" class="social-button youtube" id="youtubeBtn" target="_blank" rel="noopener noreferrer">
+        <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg> YouTube
+      </a>
+      <a href="#" class="social-button tiktok" id="tiktokBtn" target="_blank" rel="noopener noreferrer">
+        <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+        </svg> TikTok
+      </a>
+      <a href="https://petrus-86c.pages.dev/" class="social-button website" target="_blank" rel="noopener noreferrer">
+        <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg> Website
+      </a>
+      <a href="https://maps.app.goo.gl/skqWDLyJFxDbpbTbA" class="social-button location" target="_blank" rel="noopener noreferrer">
+        <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg> Lokasi
+      </a>
+    </div>
+  </div>
+
+  <!-- Modal WhatsApp -->
+  <div id="whatsappModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Hubungi Kami via WhatsApp</h3>
+        <span class="close-modal" id="closeModal">×</span>
+      </div>
+      <form id="whatsappForm" class="modal-form">
+        <div class="form-group">
+          <label for="fullName">Nama Lengkap *</label>
+          <input type="text" id="fullName" name="fullName" required>
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">No WhatsApp *</label>
+          <input type="tel" id="phoneNumber" name="phoneNumber" required>
+        </div>
+        <div class="form-group">
+          <label for="emailAddress">Email *</label>
+          <input type="email" id="emailAddress" name="emailAddress" required>
+        </div>
+        <div class="form-group">
+          <label for="jobTitle">Pekerjaan</label>
+          <input type="text" id="jobTitle" name="jobTitle">
+        </div>
+        <div class="form-group">
+          <label for="message">Pesan *</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="button" id="cancelBtn" class="btn-cancel">Batal</button>
+          <button type="submit" class="btn-submit">Kirim WhatsApp</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const defaultConfig = {
+      profile_name: "Petrus P. Ditilebit",
+      profile_title: "Web Developer & Digital Creator",
+      profile_bio: "Seorang web developer berpengalaman dengan passion dalam menciptakan solusi digital inovatif. Spesialisasi dalam pengembangan website modern, aplikasi web responsif, dan strategi digital marketing. Selalu siap membantu mewujudkan visi digital Anda menjadi kenyataan.",
+      whatsapp_number: "6282239520402",
+      facebook_url: "https://www.facebook.com/share/1JWaef54dt/",
+      instagram_url: "https://www.instagram.com/falaksoruditilebit?igsh=MTNrbzhqNWE5eWE0cA==",
+      linkedin_url: "https://www.linkedin.com/in/itranasou",
+      email_address: "ditilebit33@gmail.com",
+      twitter_url: "",
+      youtube_url: "https://www.youtube.com/@airaDiti",
+      tiktok_url: "",
+      background_color: "#667eea",
+      card_color: "#ffffff",
+      text_color: "#2d3748",
+      primary_button_color: "#667eea",
+      secondary_text_color: "#718096",
+      font_family: "Segoe UI",
+      font_size: 16
+    };
+
+    // Current configuration
+    let currentConfig = { ...defaultConfig };
+
+    async function onConfigChange(config) {
+      console.log('Config changed:', config);
+      currentConfig = { ...currentConfig, ...config };
+
+      const customFont = currentConfig.font_family;
+      const baseFontStack = 'Tahoma, Geneva, Verdana, sans-serif';
+      const baseSize = currentConfig.font_size;
+
+      // Update text content
+      document.getElementById('profileName').textContent = currentConfig.profile_name;
+      document.getElementById('profileTitle').textContent = currentConfig.profile_title;
+      document.getElementById('profileBio').textContent = currentConfig.profile_bio;
+
+      // Update colors
+      document.body.style.background = `linear-gradient(135deg, ${currentConfig.background_color} 0%, ${currentConfig.background_color}dd 100%)`;
+      document.querySelector('.container').style.background = currentConfig.card_color;
+      document.querySelector('.profile-name').style.color = currentConfig.text_color;
+      document.querySelector('.profile-title').style.color = currentConfig.primary_button_color;
+      document.querySelector('.profile-bio').style.color = currentConfig.secondary_text_color;
+      document.querySelector('.profile-image').style.background = `linear-gradient(135deg, ${currentConfig.primary_button_color} 0%, ${currentConfig.primary_button_color}dd 100%)`;
+
+      // Update fonts
+      document.querySelector('.profile-name').style.fontFamily = `${customFont}, ${baseFontStack}`;
+      document.querySelector('.profile-title').style.fontFamily = `${customFont}, ${baseFontStack}`;
+      document.querySelector('.profile-bio').style.fontFamily = `${customFont}, ${baseFontStack}`;
+      document.querySelectorAll('.social-button').forEach(btn => {
+        btn.style.fontFamily = `${customFont}, ${baseFontStack}`;
+      });
+
+      // Update font sizes
+      document.querySelector('.profile-name').style.fontSize = `${baseSize * 1.75}px`;
+      document.querySelector('.profile-title').style.fontSize = `${baseSize}px`;
+      document.querySelector('.profile-bio').style.fontSize = `${baseSize * 0.875}px`;
+      document.querySelectorAll('.social-button').forEach(btn => {
+        btn.style.fontSize = `${baseSize * 0.875}px`;
+      });
+
+      // Update social links
+      updateSocialLinks();
+    }
+
+    function updateSocialLinks() {
+      // Helper function to validate and format URLs
+      function formatSocialUrl(url, platform) {
+        if (!url || url.trim() === '') return null;
+        
+        let cleanUrl = url.trim();
+        
+        // For Facebook, preserve the exact URL format
+        if (platform === 'facebook') {
+          if (cleanUrl.startsWith('http')) {
+            return cleanUrl;
+          }
+          return `https://${cleanUrl}`;
+        }
+        
+        // Remove any existing protocol for other platforms
+        cleanUrl = cleanUrl.replace(/^https?:\/\//, '');
+        cleanUrl = cleanUrl.replace(/^www\./, '');
+        
+        // Platform-specific URL formatting
+        switch(platform) {
+          case 'instagram':
+            if (!cleanUrl.includes('instagram.com')) {
+              cleanUrl = `instagram.com/${cleanUrl}`;
+            }
+            break;
+          case 'linkedin':
+            if (!cleanUrl.includes('linkedin.com')) {
+              cleanUrl = `linkedin.com/in/${cleanUrl}`;
+            }
+            break;
+          case 'twitter':
+            if (!cleanUrl.includes('twitter.com') && !cleanUrl.includes('x.com')) {
+              cleanUrl = `twitter.com/${cleanUrl}`;
+            }
+            break;
+          case 'youtube':
+            if (!cleanUrl.includes('youtube.com')) {
+              cleanUrl = `youtube.com/${cleanUrl}`;
+            }
+            break;
+          case 'tiktok':
+            if (!cleanUrl.includes('tiktok.com')) {
+              cleanUrl = `tiktok.com/@${cleanUrl}`;
+            }
+            break;
+        }
+        
+        return `https://${cleanUrl}`;
+      }
+
+      // Update WhatsApp
+      const whatsappBtn = document.getElementById('whatsappBtn');
+      if (currentConfig.whatsapp_number && currentConfig.whatsapp_number.trim() !== '') {
+        const cleanNumber = currentConfig.whatsapp_number.replace(/[^\d]/g, '');
+        if (cleanNumber) {
+          whatsappBtn.href = `https://wa.me/${cleanNumber}`;
+          whatsappBtn.style.display = 'flex';
+        } else {
+          whatsappBtn.style.display = 'none';
+        }
+      } else {
+        whatsappBtn.style.display = 'none';
+      }
+
+      // Update other social links
+      const socialLinks = {
+        facebook: document.getElementById('facebookBtn'),
+        instagram: document.getElementById('instagramBtn'),
+        linkedin: document.getElementById('linkedinBtn'),
+        email: document.getElementById('emailBtn'),
+        twitter: document.getElementById('twitterBtn'),
+        youtube: document.getElementById('youtubeBtn'),
+        tiktok: document.getElementById('tiktokBtn')
+      };
+
+      // Update each social link
+      Object.entries(socialLinks).forEach(([platform, element]) => {
+        const configKey = `${platform}_url`;
+        const url = formatSocialUrl(currentConfig[configKey], platform);
+        
+        if (url) {
+          element.href = url;
+          element.style.display = 'flex';
+        } else {
+          element.style.display = 'none';
+        }
+      });
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        profile_name: config.profile_name || defaultConfig.profile_name,
+        profile_title: config.profile_title || defaultConfig.profile_title,
+        profile_bio: config.profile_bio || defaultConfig.profile_bio,
+        whatsapp_number: config.whatsapp_number || defaultConfig.whatsapp_number,
+        facebook_url: config.facebook_url || defaultConfig.facebook_url,
+        instagram_url: config.instagram_url || defaultConfig.instagram_url,
+        linkedin_url: config.linkedin_url || defaultConfig.linkedin_url,
+        email_address: config.email_address || defaultConfig.email_address,
+        twitter_url: config.twitter_url || defaultConfig.twitter_url,
+        youtube_url: config.youtube_url || defaultConfig.youtube_url,
+        tiktok_url: config.tiktok_url || defaultConfig.tiktok_url,
+        background_color: config.background_color || defaultConfig.background_color,
+        card_color: config.card_color || defaultConfig.card_color,
+        text_color: config.text_color || defaultConfig.text_color,
+        primary_button_color: config.primary_button_color || defaultConfig.primary_button_color,
+        secondary_text_color: config.secondary_text_color || defaultConfig.secondary_text_color,
+        font_family: config.font_family || defaultConfig.font_family,
+        font_size: config.font_size || defaultConfig.font_size
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return {
+        profile_name: config.profile_name || defaultConfig.profile_name,
+        profile_title: config.profile_title || defaultConfig.profile_title,
+        profile_bio: config.profile_bio || defaultConfig.profile_bio,
+        whatsapp_number: config.whatsapp_number || defaultConfig.whatsapp_number,
+        facebook_url: config.facebook_url || defaultConfig.facebook_url,
+        instagram_url: config.instagram_url || defaultConfig.instagram_url,
+        linkedin_url: config.linkedin_url || defaultConfig.linkedin_url,
+        email_address: config.email_address || defaultConfig.email_address,
+        twitter_url: config.twitter_url || defaultConfig.twitter_url,
+        youtube_url: config.youtube_url || defaultConfig.youtube_url,
+        tiktok_url: config.tiktok_url || defaultConfig.tiktok_url,
+        background_color: config.background_color || defaultConfig.background_color,
+        card_color: config.card_color || defaultConfig.card_color,
+        text_color: config.text_color || defaultConfig.text_color,
+        primary_button_color: config.primary_button_color || defaultConfig.primary_button_color,
+        secondary_text_color: config.secondary_text_color || defaultConfig.secondary_text_color,
+        font_family: config.font_family || defaultConfig.font_family,
+        font_size: config.font_size || defaultConfig.font_size
+      };
+    }
+
+    // Modal functionality
+    const whatsappModal = document.getElementById('whatsappModal');
+    const whatsappForm = document.getElementById('whatsappForm');
+    const closeModal = document.getElementById('closeModal');
+    const cancelBtn = document.getElementById('cancelBtn');
+
+    function openWhatsAppModal() {
+      whatsappModal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeWhatsAppModal() {
+      whatsappModal.classList.remove('show');
+      document.body.style.overflow = 'auto';
+      whatsappForm.reset();
+    }
+
+    // Event listeners for modal
+    document.getElementById('whatsappBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      openWhatsAppModal();
+    });
+
+    closeModal.addEventListener('click', closeWhatsAppModal);
+    cancelBtn.addEventListener('click', closeWhatsAppModal);
+
+    // Close modal when clicking outside
+    whatsappModal.addEventListener('click', function(e) {
+      if (e.target === whatsappModal) {
+        closeWhatsAppModal();
+      }
+    });
+
+    // Form submission
+    whatsappForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(whatsappForm);
+      const fullName = formData.get('fullName');
+      const phoneNumber = formData.get('phoneNumber');
+      const emailAddress = formData.get('emailAddress');
+      const jobTitle = formData.get('jobTitle');
+      const message = formData.get('message');
+      
+      // Validate required fields
+      if (!fullName || !phoneNumber || !emailAddress || !message) {
+        alert('Mohon lengkapi semua field yang wajib diisi!');
+        return;
+      }
+
+      // Format WhatsApp message
+      const cleanNumber = currentConfig.whatsapp_number.replace(/[^\d]/g, '');
+      const whatsappMessage = `Halo, saya ${fullName}%0A%0A` +
+        `No WhatsApp: ${phoneNumber}%0A` +
+        `Email: ${emailAddress}%0A` +
+        (jobTitle ? `Pekerjaan: ${jobTitle}%0A` : '') +
+        `Pesan: ${message}`;
+      
+      // Open WhatsApp
+      window.open(`https://wa.me/${cleanNumber}?text=${whatsappMessage}`, '_blank');
+      
+      // Close modal
+      closeWhatsAppModal();
+    });
+
+    // Initialize the microsite
+    async function initializeMicrosite() {
+      try {
+        if (typeof window.elementSdk !== 'undefined') {
+          const capabilities = mapToCapabilities(defaultConfig);
+          const editPanelValues = mapToEditPanelValues(defaultConfig);
+          
+          await window.elementSdk.initialize({
+            capabilities: capabilities,
+            editPanelValues: editPanelValues,
+            onConfigChange: onConfigChange
+          });
+        } else {
+          console.warn('Element SDK not found, using default configuration');
+          onConfigChange(defaultConfig);
+        }
+      } catch (error) {
+        console.error('Error initializing microsite:', error);
+        onConfigChange(defaultConfig);
+      }
+    }
+
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeMicrosite();
+    });
+  </script>
+</body>
+</html>
